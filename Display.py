@@ -42,8 +42,8 @@ class BoardDisplay:
 
         self.opaque = 0
 
-        self.white_wins = pygame.image.load("white_wins.png")
-        self.black_wins = pygame.image.load("black_wins.png")
+        self.white_wins = pygame.image.load("res/white_wins.png")
+        self.black_wins = pygame.image.load("res/black_wins.png")
 
     def display(self, screen):
         """
@@ -146,29 +146,29 @@ class Piece:
         :param piece: Piece type.
         """
         if piece == Chess.white_pawn:
-            self.image = pygame.image.load("white_pawn.png")
+            self.image = pygame.image.load("res/white_pawn.png")
         elif piece == Chess.white_rook:
-            self.image = pygame.image.load("white_rook.png")
+            self.image = pygame.image.load("res/white_rook.png")
         elif piece == Chess.white_knight:
-            self.image = pygame.image.load("white_knight.png")
+            self.image = pygame.image.load("res/white_knight.png")
         elif piece == Chess.white_king:
-            self.image = pygame.image.load("white_king.png")
+            self.image = pygame.image.load("res/white_king.png")
         elif piece == Chess.white_queen:
-            self.image = pygame.image.load("white_queen.png")
+            self.image = pygame.image.load("res/white_queen.png")
         elif piece == Chess.white_bishop:
-            self.image = pygame.image.load("white_bishop.png")
+            self.image = pygame.image.load("res/white_bishop.png")
         elif piece == Chess.black_pawn:
-            self.image = pygame.image.load("black_pawn.png")
+            self.image = pygame.image.load("res/black_pawn.png")
         elif piece == Chess.black_rook:
-            self.image = pygame.image.load("black_rook.png")
+            self.image = pygame.image.load("res/black_rook.png")
         elif piece == Chess.black_knight:
-            self.image = pygame.image.load("black_knight.png")
+            self.image = pygame.image.load("res/black_knight.png")
         elif piece == Chess.black_king:
-            self.image = pygame.image.load("black_king.png")
+            self.image = pygame.image.load("res/black_king.png")
         elif piece == Chess.black_queen:
-            self.image = pygame.image.load("black_queen.png")
+            self.image = pygame.image.load("res/black_queen.png")
         elif piece == Chess.black_bishop:
-            self.image = pygame.image.load("black_bishop.png")
+            self.image = pygame.image.load("res/black_bishop.png")
         self.dragged = False
         self.position = (x, y)
 

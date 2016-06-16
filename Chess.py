@@ -226,7 +226,7 @@ class Board:
         field_second = self.table[convert_point(next)]
         if field_second is None or field_second.color != self.turn:
             new_table[convert_point(previous)] = None
-            if field_first.piece_type == "Pawn":
+            if field_first.piece_type == "Pawn":  
                 if next_y == 7 or next_y == 0:
                     new_table[convert_point(next)] = get_piece(promotion, self.turn)
                 else:
