@@ -5,5 +5,6 @@ Stuff to do:
 * transform this into decent chess engine
 
 Bugs:
-* en-passant is shit
+* en-passant does not work
 * no 50 moves rule
+* title of the window should be easy to change...
