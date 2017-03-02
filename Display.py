@@ -94,14 +94,15 @@ class BoardDisplay:
                 return piece
         return None
 
-    def dragged(self, (x, y)):
+    def dragged(self, p):
         """
         This means that someone is dragging the thing that is on (x,y).
         """
+        x,y = p
         if self.board.win is not None:
             return
-        x /= self.field_width
-        y /= self.field_height
+        x //= self.field_width
+        y //= self.field_height
         self.possible_moves = self.board.get_moves((x, y))
         if not self.possible_moves:
             return
@@ -110,20 +111,21 @@ class BoardDisplay:
             field.dragged = True
             self.dragged_piece = field
 
-    def dropped(self, (x, y)):
+    def dropped(self, p):
         """
         This means that someone dropped the dragged thing on (x,y).
         """
+        x,y = p
         if self.board.win is not None:
             return
-        x /= self.field_width
-        y /= self.field_height
+        x //= self.field_width
+        y //= self.field_height
         if self.dragged_piece is not None and ((self.dragged_piece.position, (x, y)) in self.possible_moves \
                                                        or (
                     self.dragged_piece.position, (x, y), "Queen") in self.possible_moves):
             self.board.make_move(self.dragged_piece.position, (x, y))
-            print str(self.dragged_piece.position) + " " + str((x, y))
-            print self.board
+            print(str(self.dragged_piece.position) + " " + str((x, y)))
+            print(self.board)
             self.pieces = []
             index = 0
             for field in self.board.table:
@@ -140,11 +142,12 @@ class BoardDisplay:
 
 
 class Piece:
-    def __init__(self, piece, (x, y)):
+    def __init__(self, piece, point):
         """
         Initialize the given piece and load it image.
         :param piece: Piece type.
         """
+        x,y = point
         if piece == Chess.white_pawn:
             self.image = pygame.image.load("res/white_pawn.png")
         elif piece == Chess.white_rook:
@@ -178,8 +181,8 @@ class Piece:
         :param screen: Screen to display on.
         """
         if self.dragged:
-            screen.blit(self.image, (pygame.mouse.get_pos()[0] - self.image.get_width() / 2,
-                                     pygame.mouse.get_pos()[1] - self.image.get_height() / 2))
+            screen.blit(self.image, (pygame.mouse.get_pos()[0] - self.image.get_width() // 2,
+                                     pygame.mouse.get_pos()[1] - self.image.get_height() // 2))
         else:
             screen.blit(self.image,
                         (self.position[0] * self.image.get_width(),

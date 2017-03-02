@@ -98,31 +98,35 @@ def convert_index(index):
     :param index: Index in the table.
     :return: Point in two dimensions.
     """
-    snd = index / 8
+    snd = index // 8
     return index - snd * 8, snd
 
 
-def convert_point((x, y)):
+def convert_point(point):
     """
     Converts point in two dimensions to index in the tabke,
     :return: Index.
     """
+    x,y = point
     return x + y * 8
 
 
-def check_bounds((x, y)):
+def check_bounds(point):
     """
     Check if given point is in bounds of the board.
     :return:
     """
+    x, y = point
     return 0 <= x < 8 and 0 <= y < 8
 
 
-def add_vectors((x, y), (dx, dy)):
+def add_vectors(v, dv):
     """
     Sum two vectors together.
     :return: Resulting vector.
     """
+    x, y = v
+    dx, dy = dv
     return x + dx, y + dy
 
 
@@ -146,7 +150,6 @@ class Board:
         self.white_castle = (True, True)
         self.black_castle = (True, True)
         self.en_passant = -1
-
         self.moves = []
         for i in range(64):
             self.moves.append([])
@@ -208,12 +211,14 @@ class Board:
         """
         return self.is_checked(convert_index(self.table.index(get_piece("King", self.turn))))
 
-    def make_move(self, (prev_x, prev_y), (next_x, next_y), promotion="Queen"):
+    def make_move(self, prev, nxt, promotion="Queen"):
         """
         Make one move on given board. It also changes the players turn.
         :param promotion: To which piece the pawn should promote.
         :return: Nothing?
         """
+        prev_x, prev_y = prev
+        next_x, next_y = nxt
         new_table = list(self.table)
 
         def check_en_passant(new_table, x):
@@ -301,14 +306,14 @@ class Board:
                not self.is_checked((5, row)) and \
                not self.is_checked((6, row))
 
-    def possible_moves(self, (x, y)):
+    def possible_moves(self, point):
         """
         Generates all possible moves from given point. It should be calculated only
         once and then stored as a field in board. One should use get_moves instead of
         possible_moves.
         :return: List containing all possible moves from given point.
         """
-        point = (x, y)
+        x, y = point
 
         def check_direction(direction, slide):
             moves = []
@@ -415,7 +420,7 @@ class Board:
 
         self.win = opposite_color(self.turn)
         for i in range(64):
-            self.moves[i] = filter(check_move, self.possible_moves(convert_index(i)))
+            self.moves[i] = list(filter(check_move, self.possible_moves(convert_index(i))) )
             if self.moves[i]:
                 self.win = None
 
