@@ -18,7 +18,6 @@ class BoardDisplay:
         self.board.recalculate_moves()
 
         # Change to prettier fields
-
         self.white_field = pygame.Surface((self.field_width, self.field_height))
         self.white_field.fill((245, 222, 179))
 
